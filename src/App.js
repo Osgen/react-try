@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
+import Button from './Button';
+import TextBox from './TextBox';
+import Title from './Title';
+import axios from 'axios';
+
+
 
 function App() {
+
+  const [name, setName] = useState('');
+  const [selectedPokemon, setSelectedPokemon] = useState({name:'', id:''});
+
+  const getPokemonByNameId = ()=>{
+  
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`)
+      .then((response)=>{
+        setSelectedPokemon({name:response.data.name, id:response.data.id});
+      })
+      .catch((err)=> {
+        console.error(err);
+      });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Title>Pokedex</Title>
+    <TextBox type="text" name="" id="buttonSearch" value={name} onChange={setName}></TextBox>
+    <Button onClick={()=>{getPokemonByNameId()}}>Enviar</Button>
+    <br></br>
+    <span>{selectedPokemon.name} {selectedPokemon.id}</span>
+    </>
   );
 }
 
