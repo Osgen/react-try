@@ -24,14 +24,14 @@ function App() {
   }
 
   return (
-    <>
+    <div style={{textAlign:'center'}}>
     <Title>Pokedex</Title>
     <TextBox type="text" name="" id="buttonSearch" value={name} onChange={setName}></TextBox>
     <Button onClick={()=>{getPokemonByNameId()}}>Enviar</Button>
     <br></br>
     <span>{selectedPokemon.name} {selectedPokemon.id}</span>
     <img src={selectedPokemon.image}></img>
-    </>
+    </div>
   );
 }
 
