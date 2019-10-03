@@ -16,7 +16,7 @@ function App() {
   
     axios.get(`https://pokeapi.co/api/v2/pokemon/${name}/`)
       .then((response)=>{
-        setSelectedPokemon({name:response.data.name, id:response.data.id});
+        setSelectedPokemon({name:response.data.name, id:response.data.id, image:response.data.sprites.front_default});
       })
       .catch((err)=> {
         console.error(err);
@@ -30,6 +30,7 @@ function App() {
     <Button onClick={()=>{getPokemonByNameId()}}>Enviar</Button>
     <br></br>
     <span>{selectedPokemon.name} {selectedPokemon.id}</span>
+    <img src={selectedPokemon.image}></img>
     </>
   );
 }
